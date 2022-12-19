@@ -19,24 +19,31 @@ public class Post {
     public LocalDate getData() {
         return data;
     }
+
     public void setData(LocalDate data) {
         this.data = data;
     }
+
     public LocalTime getHora() {
         return hora;
     }
+
     public void setHora(LocalTime hora) {
         this.hora = hora;
     }
+
     public String getConteudo() {
         return conteudo;
     }
+
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
     }
+
     public String getAutor() {
         return autor;
     }
+
     public void setAutor(String autor) {
         this.autor = autor;
     }

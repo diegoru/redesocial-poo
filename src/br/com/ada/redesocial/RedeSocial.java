@@ -29,6 +29,7 @@ public class RedeSocial {
             System.out.println("\n Opção inválida!");
         }
     }
+
     public void opcoesMenuPerfil() {
         System.out.println("\n\t -- Menu Perfil --");
         System.out.println(" Digite uma das opções abaixo: ");
@@ -48,6 +49,7 @@ public class RedeSocial {
             System.out.println("\n Opção inválida!");
         }
     }
+
     public void cadastroPerfil() throws InvalidInputException {
         Scanner entrada = new Scanner(System.in);
         System.out.println("\n\t -- Realizar Cadastro --");
@@ -67,6 +69,7 @@ public class RedeSocial {
             System.out.println("\n Login já existe, tente utilizar outro nome. Caso seja você, faça o login.");
         }
     }
+
     public void entrar() throws UserNotFoundException, InvalidPasswordException {
         Scanner entrada = new Scanner(System.in);
         System.out.println("\n\t -- Fazer Login --");
@@ -77,16 +80,18 @@ public class RedeSocial {
         String senha = entrada.nextLine();
 
         RedeSocialService.getInstance().fazerLogin(login, senha);
-        System.out.println("\n ## Olá, " + RedeSocialService.getInstance().getPerfilLogado().getNome() + "! ##");
+        System.out.println("\n ## Bem-vindo, " + RedeSocialService.getInstance().getPerfilLogado().getNome() + "! ##");
     }
+
     public void criarPost() throws InvalidInputException {
         Scanner entrada = new Scanner(System.in);
         System.out.println("\n\t -- Criar Post --");
-        System.out.print(" Conteudo: ");
+        System.out.print(" Conteúdo: ");
         String conteudo = entrada.nextLine();
         RedeSocialService.getInstance().postar(conteudo);
         System.out.println("\n Post criado com sucesso!");
     }
+
     public void mostrarTimeline() {
         RedeSocialService.getInstance().timeline();
         List<Post> postsPerfil = RedeSocialService.getInstance().getPostsTimeline();
@@ -98,7 +103,7 @@ public class RedeSocial {
                 DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm");
                 System.out.println(" " + post.getData().format(formatterData) + " às "
-                        + post.getHora().format(formatterHora) + " - " + post.getConteudo());
+                        + post.getHora().format(formatterHora) + "-\"" + post.getConteudo() + "\"");
                 System.out.println(" ---");
             }
         }

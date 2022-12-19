@@ -20,6 +20,7 @@ public class RedeSocialService {
     private final List<Post> postsTimeline;
     private Perfil perfilLogado;
     private final RedeSocial redeSocial;
+
     public RedeSocialService() {
         this.logado = false;
         this.sair = false;
@@ -28,6 +29,7 @@ public class RedeSocialService {
         this.postsTimeline = new ArrayList<>();
         this.redeSocial = new RedeSocial();
     }
+
     public void iniciarRedeSocial() {
         while (!sair) {
             if (logado) {
@@ -37,6 +39,7 @@ public class RedeSocialService {
             }
         }
     }
+
     public void menuPrincipal(String opcao) {
         if (opcao.equalsIgnoreCase("c")) {
             try {
@@ -56,6 +59,7 @@ public class RedeSocialService {
             }
         }
     }
+
     public void menuPerfil(String opcaoMenuPerfil) {
         if (opcaoMenuPerfil.equalsIgnoreCase("p")) {
             try {
@@ -69,6 +73,7 @@ public class RedeSocialService {
             redeSocial.mostrarTimeline();
         }
     }
+
     public boolean cadastrarPerfil(String nome, String login, String senha) throws InvalidInputException {
         if (loginNaoExiste(login)) {
             PerfilService perfilService = new PerfilService();
@@ -78,15 +83,18 @@ public class RedeSocialService {
         }
         return false;
     }
+
     public void fazerLogin(String login, String senha) throws UserNotFoundException, InvalidPasswordException {
         perfilLogado = validaLogin(login, senha);
         logado = true;
     }
+
     public void postar(String conteudo) throws InvalidInputException {
         PostService postService = new PostService();
         Post post = postService.cadastrar(conteudo, perfilLogado.getLogin());
         posts.add(post);
     }
+
     public void timeline() {
         postsTimeline.clear();
         for (int i = posts.size() - 1; i >= 0; i--) {
@@ -95,6 +103,7 @@ public class RedeSocialService {
             }
         }
     }
+
     private boolean loginNaoExiste(String login) {
         for (Perfil perfil : perfis) {
             if (perfil.getLogin().equalsIgnoreCase(login)) {
@@ -103,6 +112,7 @@ public class RedeSocialService {
         }
         return true;
     }
+
     private Perfil validaLogin(String login, String senha) throws UserNotFoundException, InvalidPasswordException {
         for (Perfil perfil : perfis) {
             if (perfil.getLogin().equals(login)) {
@@ -115,18 +125,23 @@ public class RedeSocialService {
         }
         throw new UserNotFoundException("\n Usuário não cadastrado!");
     }
+
     public Perfil getPerfilLogado() {
         return perfilLogado;
     }
+
     public void setLogado(boolean logado) {
         this.logado = logado;
     }
+
     public void setSair(boolean sair) {
         this.sair = sair;
     }
+
     public List<Post> getPostsTimeline() {
         return postsTimeline;
     }
+
     public static RedeSocialService getInstance() {
         return INSTANCIA;
     }
